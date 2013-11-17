@@ -1,0 +1,8 @@
+
+search for packages on : https://npmjs.org/
+
+npm init : creats package.json 
+npm install "packagename" --save : installs package localy and adds to package.json
+
+npm install : installs all dependencies
+

@@ -1,0 +1,77 @@
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	
+
+	<script>
+        window.define = function(factory) {
+            try{ delete window.define; } catch(e){ window.define = void 0; } // IE
+            window.when = factory();
+        };
+        window.define.amd = {};
+    </script>
+
+    <script src="/libs/when.js"></script>
+
+    <script>
+    	var printValue = function(val) {
+    		console.log( val );
+    	}
+
+/*
+    	function getValue( cb ){
+    		setTimeout(function(){
+    			if( typeof cb === 'function') {
+    				cb("wert");
+    			}
+    		}, 3000 );
+
+    		return true;
+    	}
+
+
+    	var res = getValue( function( val){
+			printValue(val );    			
+    	});
+
+
+    	printValue( res );    
+*/
+
+
+    	function getValue() {
+	     	var deffered = when.defer();
+	        
+	        setTimeout(function(){
+	            deffered.resolve("my value");
+	        },3000);
+
+	       	setTimeout(function(){
+	            deffered.reject("fehler");
+	        }, 1000);
+
+	        
+	        return deffered.promise;
+    	}
+
+
+    	var promise = getValue();
+    	promise.then(function(param){
+    		printValue( param );
+    	}).otherwise(function(param){
+    		printValue( param );
+    	});
+
+
+
+
+
+
+
+    </script>
+
+</body>
+</html>

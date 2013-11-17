@@ -1,0 +1,58 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+
+
+
+</head>
+<body>
+    socket-rpc
+    
+    <button id="btn">get message</button>
+
+    <script src="/libs/socket.io.js"></script>
+    <script>
+        window.define = function(factory) {
+            try{ delete window.define; } catch(e){ window.define = void 0; } // IE
+            window.when = factory();
+        };
+        window.define.amd = {};
+    </script>
+
+    <script src="/libs/when.js"></script>
+    <script src="/libs/socket.io-rpc-client.js"></script>
+    <script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+    <script>
+        var _channel = null;
+
+        RPC.connect('http://localhost:9999');
+
+
+        RPC.loadChannel('myChannel').then(
+            function (channel) {
+                _channel = channel;
+            }
+        );
+
+        $('#btn').click(function(event){
+            _channel.chat({ 
+                mssg : "вфавфыа ÄÖÜöäüß"
+            }).then(function (res) {
+                console.log( res );
+            });
+        });
+
+        
+
+        
+        RPC.expose('ClientChannel', {
+            fnOnClient: function (param) {
+                console.log( param );
+                return 'from client: ' + param;
+            }
+        });
+        
+    </script>
+</body>
+</html>
