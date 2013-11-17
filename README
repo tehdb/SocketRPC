@@ -1,4 +1,3 @@
-
 search for packages on : https://npmjs.org/
 
 npm init : creats package.json 
@@ -6,3 +5,4 @@ npm install "packagename" --save : installs package localy and adds to package.j
 
 npm install : installs all dependencies
 
+git clone "REPONAME"
